@@ -1,4 +1,4 @@
-import { createConnection } from "mysql2";
+import mysql from "mysql2/promise";
 
 const config = {
   host: "localhost",
@@ -7,4 +7,4 @@ const config = {
   database: "secretaria",
 };
 
-export const conn = createConnection(config);
+export const conn = await mysql.createPool(config);
