@@ -1,5 +1,4 @@
-import React from "react";
-
+//componente de un boton
 export default function boton({ text, className, onClick }) {
   return (
     <div className="flex justify-center">
