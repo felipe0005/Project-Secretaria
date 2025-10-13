@@ -6,15 +6,20 @@ export default function FormUsuario({
   editingUser,
 }) {
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center transition-opacity duration-300">
+    <div className="fixed inset-0 flex justify-center items-center bg-black/40 backdrop-blur-sm animate-fadeIn">
       <form
         onSubmit={onSubmit}
-        className="bg-white p-6 rounded-2xl shadow-2xl w-full max-w-lg transform transition-transform duration-300 scale-100"
+        className="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-lg transform animate-modalEnter"
       >
-        <h3 className="text-xl font-bold mb-4">
-          {editingUser ? "Editar Usuario" : "Crear Usuario"}
-        </h3>
+        {/* Título */}
+        <div className="text-center mb-6">
+          <h3 className="text-2xl font-extrabold text-gray-800 mb-2">
+            {editingUser ? "Editar Usuario" : "Crear Usuario"}
+          </h3>
+          <div className="h-1 w-16 bg-sky-500 mx-auto rounded-full"></div>
+        </div>
 
+        {/* Campos */}
         <div className="grid grid-cols-2 gap-4">
           <input
             type="text"
@@ -23,7 +28,7 @@ export default function FormUsuario({
             onChange={(e) =>
               setFormData({ ...formData, nombre: e.target.value })
             }
-            className="border px-3 py-2 rounded w-full"
+            className="border border-gray-300 px-4 py-2.5 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 outline-none transition w-full"
             required
           />
           <input
@@ -33,7 +38,7 @@ export default function FormUsuario({
             onChange={(e) =>
               setFormData({ ...formData, materia: e.target.value })
             }
-            className="border px-3 py-2 rounded w-full"
+            className="border border-gray-300 px-4 py-2.5 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 outline-none transition w-full"
             required
           />
           <input
@@ -43,7 +48,7 @@ export default function FormUsuario({
             onChange={(e) =>
               setFormData({ ...formData, horario: e.target.value })
             }
-            className="border px-3 py-2 rounded w-full"
+            className="border border-gray-300 px-4 py-2.5 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 outline-none transition w-full col-span-2 sm:col-span-1"
             required
           />
           <select
@@ -51,7 +56,7 @@ export default function FormUsuario({
             onChange={(e) =>
               setFormData({ ...formData, estado: e.target.value })
             }
-            className="border px-3 py-2 rounded w-full col-span-2"
+            className="border border-gray-300 px-4 py-2.5 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 outline-none transition w-full col-span-2"
             required
           >
             <option value="">Estado</option>
@@ -61,17 +66,18 @@ export default function FormUsuario({
           </select>
         </div>
 
-        <div className="mt-4 flex justify-end gap-2">
+        {/* Botones */}
+        <div className="mt-6 flex justify-end gap-3">
           <button
             type="button"
             onClick={onCancel}
-            className="bg-gray-300 px-4 py-2 rounded hover:bg-gray-400 transition"
+            className="px-5 py-2.5 rounded-lg bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold shadow-sm transition"
           >
             Cancelar
           </button>
           <button
             type="submit"
-            className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
+            className="px-5 py-2.5 rounded-lg bg-sky-600 hover:bg-sky-700 text-white font-semibold shadow-md transition"
           >
             {editingUser ? "Guardar Cambios" : "Crear"}
           </button>
