@@ -74,65 +74,80 @@ export default function Product() {
   };
 
   return (
-    <div>
-      <section>
-        <Boton text="Agregar" onClick={handleCreate} />
+    <div className="p-6 bg-gray-50 min-h-screen">
+      <section className="max-w-6xl mx-auto bg-white rounded-3xl shadow-xl p-6 animate-fadeIn">
+        <div className="flex justify-between items-center mb-4">
+          <h2 className="text-2xl font-bold text-sky-700">
+            Gestión de Usuarios
+          </h2>
+          <Boton text="Agregar Usuario" onClick={handleCreate} />
+        </div>
 
         {loading ? (
-          <p className="text-center text-gray-500 py-4">Cargando usuarios...</p>
+          <p className="text-center text-gray-500 py-6 text-lg animate-pulse">
+            Cargando usuarios...
+          </p>
+        ) : usuarios.length === 0 ? (
+          <p className="text-center text-gray-400 py-6 italic">
+            No hay usuarios registrados.
+          </p>
         ) : (
-          <table className="w-full">
-            <thead className="bg-gray-50 border-b-2 border-gray-200">
-              <tr className="font-bold">
-                <th className="p-3 text-sm text-left">#</th>
-                <th className="p-3 text-sm text-left">NOMBRE</th>
-                <th className="p-3 text-sm text-left">MATERIA</th>
-                <th className="p-3 text-sm text-left">ESTADO</th>
-                <th className="p-3 text-sm text-left">HORARIO</th>
-                <th className="p-3 text-sm text-left">ACCIONES</th>
-              </tr>
-            </thead>
-            <tbody>
-              {usuarios.map((usuario, index) => (
-                <tr
-                  key={usuario.id}
-                  className="hover:bg-gray-100 transition-colors"
-                >
-                  <td className="px-6 py-4 text-sm">{index + 1}</td>
-                  <td className="px-6 py-4 text-sm">{usuario.nombre}</td>
-                  <td className="px-6 py-4 text-sm">{usuario.materia}</td>
-                  <td className="px-6 py-4 text-sm">
-                    <span
-                      className={`px-3 py-1 text-xs font-semibold rounded-full ${
-                        usuario.estado === "titular"
-                          ? "bg-green-100 text-green-800"
-                          : usuario.estado === "suplente"
-                          ? "bg-yellow-100 text-yellow-800"
-                          : "bg-red-100 text-red-800"
-                      }`}
-                    >
-                      {usuario.estado}
-                    </span>
-                  </td>
-                  <td className="px-6 py-4 text-sm">{usuario.horario}</td>
-                  <td className="px-6 py-4 flex gap-2">
-                    <button
-                      onClick={() => handleEdit(usuario)}
-                      className="font-bold bg-yellow-500 border-2 border-yellow-500 text-white px-3 py-1 rounded hover:bg-white hover:text-yellow-500 transition"
-                    >
-                      Editar
-                    </button>
-                    <button
-                      onClick={() => handleDelete(usuario.id)}
-                      className="font-bold bg-red-500 border-2 border-red-500 text-white px-3 py-1 rounded hover:bg-white hover:text-red-500 transition"
-                    >
-                      Eliminar
-                    </button>
-                  </td>
+          <div className="overflow-x-auto rounded-2xl border border-gray-200">
+            <table className="min-w-full text-sm text-gray-700">
+              <thead className="bg-gradient-to-r from-sky-500 to-sky-600 text-white">
+                <tr>
+                  <th className="p-3 text-left">#</th>
+                  <th className="p-3 text-left">Nombre</th>
+                  <th className="p-3 text-left">Materia</th>
+                  <th className="p-3 text-left">Estado</th>
+                  <th className="p-3 text-left">Horario</th>
+                  <th className="p-3 text-left">Acciones</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody className="divide-y divide-gray-200">
+                {usuarios.map((usuario, index) => (
+                  <tr
+                    key={usuario.id}
+                    className="hover:bg-sky-50 transition duration-200"
+                  >
+                    <td className="px-6 py-4 font-medium text-gray-600">
+                      {index + 1}
+                    </td>
+                    <td className="px-6 py-4 capitalize">{usuario.nombre}</td>
+                    <td className="px-6 py-4">{usuario.materia}</td>
+                    <td className="px-6 py-4">
+                      <span
+                        className={`px-3 py-1 text-xs font-semibold rounded-full ${
+                          usuario.estado === "titular"
+                            ? "bg-green-100 text-green-800"
+                            : usuario.estado === "suplente"
+                            ? "bg-yellow-100 text-yellow-800"
+                            : "bg-red-100 text-red-800"
+                        }`}
+                      >
+                        {usuario.estado}
+                      </span>
+                    </td>
+                    <td className="px-6 py-4">{usuario.horario}</td>
+                    <td className="px-6 py-4 flex gap-2">
+                      <button
+                        onClick={() => handleEdit(usuario)}
+                        className="px-4 py-1.5 rounded-lg text-white font-semibold bg-yellow-500 hover:bg-yellow-600 shadow-sm transition"
+                      >
+                        Editar
+                      </button>
+                      <button
+                        onClick={() => handleDelete(usuario.id)}
+                        className="px-4 py-1.5 rounded-lg text-white font-semibold bg-red-500 hover:bg-red-600 shadow-sm transition"
+                      >
+                        Eliminar
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         )}
       </section>
 
